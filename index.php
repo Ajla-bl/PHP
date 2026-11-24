@@ -6,43 +6,45 @@ $sql = "SELECT * FROM user";
 $query = $conn->prepare($sql);
 $query->execute();
 $users = $query->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>CRUD - Read Example</title>
+    <title>Document</title>
+
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; }
-        table { border-collapse: collapse; width: 100%; max-width: 650px; }
-        th, td { border: 1px solid #aaa; padding: 10px; text-align: left; }
-        th { background: #eee; }
+
+        form>input {
+            margin-bottom: 10px;
+            font-size: 20px;
+            padding: 5px;
+        }
+
+        button {
+            background: none;
+            border: none;
+            border: 1px solid black;
+            padding: 10px 40px;
+            font-size: 20px;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
-    <h1>Users</h1>
-    <p>This page reads users from the MySQL database.</p>
 
-    <table>
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Surname</th>
-            <th>Email</th>
-        </tr>
-        <?php foreach ($users as $user): ?>
-            <tr>
-                <td><?= htmlspecialchars((string) $user['id']) ?></td>
-                <td><?= htmlspecialchars($user['name']) ?></td>
-                <td><?= htmlspecialchars($user['surname']) ?></td>
-                <td><?= htmlspecialchars($user['email']) ?></td>
-            </tr>
-        <?php endforeach; ?>
-    </table>
+    <form action="add.php" method="POST">
 
-    <?php if (empty($users)): ?>
-        <p>No users found.</p>
-    <?php endif; ?>
+        <input type="text" name="username" placeholder="Username"><br>
+        <input type="text" name="name" placeholder="Emri"><br>
+        <input type="text" name="surname" placeholder="Mbiemri"><br>
+        <input type="password" name="password" placeholder="Password"><br>
+        <input type="email" name="email" placeholder="Email"><br><br>
+        <button type="submit" name="submit">Add</button>
+
+    </form>
+
 </body>
 </html>
